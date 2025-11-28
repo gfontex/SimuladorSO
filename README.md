@@ -63,10 +63,3 @@ ________________________________________
 •	README.md → Este arquivo com explicações.
 •	simlog.txt → Log gerado em cada execução.
 
- Próximos Passos
-•	Implementar leitura de workloads a partir de arquivos externos.
-•	Adicionar políticas alternativas de substituição de página (ex.: LRU, Clock).
-•	Melhorar o sistema de arquivos (suporte a diretórios, permissões, etc.).
-•	Criar interface gráfica opcional para visualização de filas e timeline.
-
-
