@@ -58,8 +58,4 @@ Context switches: 5
 Device disk utilization time: 9
 Device tty utilization time: 0
 ________________________________________
- Estrutura do Projeto
-•	SimuladorSO_Basico.cs → Código principal do simulador.
-•	README.md → Este arquivo com explicações.
-•	simlog.txt → Log gerado em cada execução.
 
