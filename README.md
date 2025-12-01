@@ -1,54 +1,171 @@
-Simulador de Sistema
-Este projeto é um simulador de Sistema Operacional implementado em C# baseado no conteúdo visto na faculdade FHO. O objetivo é oferecer uma base simplificada para estudar conceitos fundamentais de SO: processos, escalonamento, gerenciamento de memória, E/S e sistema de arquivos.
+🖥️ Simulador de Sistema Operacional
 
-Nome: Gabriel Fontes    RA:112958
+Projeto acadêmico em C# — Faculdade FHO
+Autor: Gabriel Fontes • RA: 112958
 
-Funcionalidades Implementadas
-•	Processos e Threads
-o	Estruturas PCB e TCB.
-o	Estados: Novo, Pronto, Executando, Bloqueado, Finalizado.
-•	Escalonador de CPU
-o	Algoritmos: FCFS, Round-Robin (quantum configurável) e Prioridade.
-o	Contabilização de trocas de contexto.
-•	Gerenciamento de Memória
-o	Paginação simples com molduras.
-o	Política FIFO para substituição.
-o	Contagem de faltas de página.
-•	Entrada e Saída (E/S)
-o	Dispositivo genérico de bloco (ex.: disco) e de caractere (ex.: terminal).
-o	Fila de pedidos de E/S e tempos de serviço.
-•	Sistema de Arquivos
-o	Estrutura hierárquica simples em memória.
-o	Operações básicas: criar, abrir, escrever, ler.
-•	Métricas e Log
-o	Tempo de retorno médio.
-o	Tempo de espera médio.
-o	Utilização aproximada da CPU.
-o	Número de trocas de contexto.
-o	Faltas de página.
-o	Log textual salvo em simlog.txt.
+📘 Sobre o Projeto
 
-Como Executar
-1.	Instale o .NET SDK 7+: Download aqui
-2.	Crie um novo projeto console:
- 	dotnet new console -n SimuladorSO
+Este é um simulador didático de Sistema Operacional, desenvolvido para fins acadêmicos, baseado nos conteúdos ministrados na FHO.
+Ele implementa de forma simplificada — porém realista — os principais componentes de um SO moderno:
+
+✔ processos
+✔ threads
+✔ escalonamento
+✔ memória virtual
+✔ E/S
+✔ sistema de arquivos
+✔ pipeline de CPU
+✔ detecção de deadlock
+✔ logs e métricas detalhadas
+
+O projeto evoluiu além da versão mínima da disciplina e hoje funciona como um mini-laboratório de Sistemas Operacionais.
+
+
+
+✨ Funcionalidades
+🧩 Processos e Threads
+
+- Estrutura PCB (Process Control Block)
+
+- Estrutura TCB (Thread Control Block)
+
+- Estados: Novo, Pronto, Executando, Bloqueado, Finalizado
+
+- Suporte a múltiplas threads por processo
+
+- Contabilização completa de tempos e trocas de contexto
+
+| Algoritmo       | Tipo           | Preempção | Observações                 |
+| --------------- | -------------- | --------- | --------------------------- |
+| **FCFS**        | Não preemptivo | ❌         | Simples e determinístico    |
+| **Round-Robin** | Preemptivo     | ✔         | Quantum configurável        |
+| **Prioridade**  | Ambos          | ✔         | Prioridades fixas           |
+| **SJF**  | Não preemptivo | ❌         | Usa tempo estimado restante |
+
+🧠 Memória
+
+- Paginação simples
+
+- Molduras de tamanho configurável
+
+- Política de substituição FIFO
+
+- Contagem de page faults
+
+- Mapeamento página→moldura
+
+🖨️ Entrada e Saída
+
+- Dispositivo de bloco (Disco)
+
+- Dispositivo de caractere (TTY)
+
+- Fila interna de requisições
+
+- Simulação de tempos de serviço
+
+- Bloqueio e desbloqueio automático de processos
+
+📁 Sistema de Arquivos
+✔ Modelo tradicional (simples)
+
+- Diretórios e arquivos em memória
+
+- Criar → Abrir → Ler → Escrever
+
+✔ Modelo avançado baseado em Inodes 
+
+- Estrutura semelhante ao UNIX
+
+- Diretórios mapeiam nomes → inode IDs
+
+- Arquivos representados por índices numa tabela
+
+- Blocos de dados simulados
+
+⚙️ Pipeline da CPU 
+Simulação completa das 5 etapas clássicas:
+
+- IF – Instruction Fetch
+
+- ID – Decode
+
+- EX – Execute
+
+- MEM – Memory Access
+
+- WB – Write Back
+
+Inclui:
+
+- Avanço por ciclo
+
+- Inserção de instruções
+
+- Flush (ex.: branch mispredict)
+
+🕸️ Detecção de Deadlock 
+
+- Implementação de Wait-for Graph
+
+Registro de:
+
+- Quem possui recurso
+
+- Quem está esperando
+
+- Detecção de ciclos via DFS
+
+- Identificação dos processos envolvidos no deadlock
+
+📊 Métricas e Logs
+
+Geração automática de:
+
+- Tempo de retorno médio (turnaround)
+
+- Tempo de espera médio
+
+- Utilização aproximada da CPU
+
+- Context switches
+
+- Page faults
+
+- Utilização de dispositivos
+
+- Log completo em simlog.txt
+
+⚙️ Como Executar
+1️⃣ Instale o .NET 7+
+
+https://dotnet.microsoft.com/en-us/download
+
+2️⃣ Crie o projeto:
+
+dotnet new console -n SimuladorSO
 cd SimuladorSO
-3.	Substitua o conteúdo de Program.cs pelo arquivo SimuladorSO_Basico.cs.
-4.	Execute com:
- 	dotnet run -- [opções]
 
- Parâmetros Disponíveis
-•	--alg fcfs|rr|prio → Define o algoritmo de escalonamento.
-•	--quantum N → Quantum usado no Round-Robin (padrão: 2).
-•	--frames N → Número de molduras de memória.
-•	--pagesize N → Tamanho de página (simulado).
-•	--workload sample → Usa a carga de trabalho de exemplo.
+3️⃣ Substitua o Program.cs
+
+Use o arquivo fornecido no projeto completo.
+
+4️⃣ Execute com:
+dotnet run -- [opções]
+
+🔧 Parâmetros de Execução
+| Parâmetro           | Descrição               |      |      |                                      |
+| ------------------- | ----------------------- | ---- | ---- | ------------------------------------ |
+| `--alg fcfs         | rr                      | prio | sjf` | Seleciona algoritmo de escalonamento |
+| `--quantum N`       | Quantum do Round-Robin  |      |      |                                      |
+| `--frames N`        | Molduras de memória     |      |      |                                      |
+| `--pagesize N`      | Tamanho da página       |      |      |                                      |
+| `--workload sample` | Usa workload de exemplo |      |      |                                      |
+
 Exemplo:
 dotnet run -- --alg rr --quantum 3 --frames 4 --pagesize 4096 --workload sample
 
-Saída do Programa
-Durante a execução, o simulador: - Mostra no terminal os eventos (admissão, execução, bloqueio, fim de processos). - Gera o arquivo simlog.txt com todo o histórico de execução. - Ao final, imprime as métricas calculadas.
-Exemplo de métricas:
+📤 Exemplo de Saída
 Clock final: 42
 Avg turnaround: 11.25
 Avg waiting: 6.75
@@ -57,5 +174,29 @@ Page faults: 7
 Context switches: 5
 Device disk utilization time: 9
 Device tty utilization time: 0
-________________________________________
 
+🧩 Estrutura do Projeto
+SimuladorSO/
+ ├── Program.cs
+ ├── Processos/
+ │     ├── PCB.cs
+ │     ├── TCB.cs
+ ├── Escalonador/
+ │     ├── FCFS.cs
+ │     ├── RoundRobin.cs
+ │     ├── Prioridade.cs
+ │     └── SJF.cs
+ ├── Memoria/
+ │     ├── GerenciadorMemoria.cs
+ ├── IO/
+ │     ├── Dispositivo.cs
+ │     ├── RequisicaoIO.cs
+ ├── SistemaArquivos/
+ │     ├── FS_Simples.cs
+ │     └── InodeFileSystem.cs
+ ├── Pipeline/
+ │     └── PipelineCPU.cs
+ ├── Deadlock/
+ │     └── DeadlockDetector.cs
+ ├── simlog.txt
+ └── SimuladorSO.csproj
